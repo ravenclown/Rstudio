@@ -1,4 +1,4 @@
-findGenesInRange <- function(snp_loc,search_range,gff_gtf_file_loc,output_loc)
+findGenesInRange <- function(chr,snp_loc,search_range,gff_gtf_file_loc,output_loc)
 {
   library(writexl)
   print("Loading GFF/GTF File")
@@ -14,11 +14,8 @@ findGenesInRange <- function(snp_loc,search_range,gff_gtf_file_loc,output_loc)
   {
     Upstream_range=0;
   }
-  print(Upstream_range)
-  print(Downstream_range)  
-  
   for (i in 1:nrow(annot)) {
-    if(annot$V4[[i]]>=Upstream_range && annot$V5[[i]]<=Downstream_range && annot$V3[[i]]=='gene'){
+    if(annot$V4[[i]]>=Upstream_range && annot$V5[[i]]<=Downstream_range && annot$V3[[i]]=='gene' && annot$V1[[i]]==chr){
       df<-rbind(df,annot[i,])
       print(annot$V9[[i]])
     }
@@ -26,4 +23,4 @@ findGenesInRange <- function(snp_loc,search_range,gff_gtf_file_loc,output_loc)
   write_xlsx(df,path=output_loc)
 }
 
-findGenesInRange(1000,200,"~/GCF_000331145.1_ASM33114v1_genomic.gff","~/Desktop/output.xlsx")
+findGenesInRange('NC_021160.1',1000000,200000,"~/GCF_000331145.1_ASM33114v1_genomic.gff","~/Desktop/output.xlsx")
