@@ -1,4 +1,4 @@
-#take from https://palfalvi.org/post/local-blast-from-r/
+#taken from https://palfalvi.org/post/local-blast-from-r/
 blastn <- function(blast_db,input,evalue=1e-6,format=6)
 {
 Sys.setenv(PATH=paste(Sys.getenv("PATH"), "~/ncbi-blast-2.12.0+/bin/", sep=":"))
